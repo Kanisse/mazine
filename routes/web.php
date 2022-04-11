@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RDVController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', function () {return view('welcome');});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('RDV', RDVController::class);
+
+Route::post('search', [RDVController::class, 'search'] )
+-> name('search');
