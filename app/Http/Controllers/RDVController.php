@@ -17,7 +17,8 @@ class RDVController extends Controller
      */
     public function index()
     {
-        //
+       $rdvs=  RDV::all();
+       return view('index', ['rdvs' => $rdvs]);
     }
 
     /**
@@ -27,7 +28,7 @@ class RDVController extends Controller
      */
     public function create()
     {
-        //
+        return view ('create');
     }
 
     /**
@@ -38,7 +39,8 @@ class RDVController extends Controller
      */
     public function store(StoreRDVRequest $request)
     {
-        //
+       
+        
     }
 
     /**
@@ -88,21 +90,13 @@ class RDVController extends Controller
 
     public function search(Request $request){
 
-        $dates= array('9:00','10:00','11:00','12:00','13:00'
+        $heure0= array('9:00','10:00','11:00','12:00','13:00'
     ,'14:00','15:00','16:00');
-    $dates0=array();
-        $jour=Carbon::parse($request->input('jour'))
-        ->format('Y-m-d');
-        $heures=RDV::all();
-        for($i=0;$i<count($dates);$i++){
-            foreach($heures as $item) {
-                if($item ->heure == $dates[$i] ){
-                    unset($dates[$i]);
-                    $dates0[]=$dates[$i];
-            }
-        }
-        
-    }
-        return view('index',compact('jour','heures','dates','dates0'));
+    $jour=$request->input('jour');
+    $heure=RDV:: select('heure')->where ('jour', $jour)
+                                ->whereIn('heure',$heure0)
+                                ->OrderBy('heure')
+                                ->get();
+        return view('index',compact('heure0','heure'));
     }
 }

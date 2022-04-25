@@ -65,7 +65,9 @@ class RDVPolicy
      */
     public function delete(User $user, RDV $rDV)
     {
-        //
+        $user=User::whereIn('id',[1,2,3]);
+        $rDV -> delete();
+
     }
 
     /**

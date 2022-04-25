@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\RDVController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

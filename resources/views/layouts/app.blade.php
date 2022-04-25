@@ -79,5 +79,12 @@
             @yield('content')
         </main>
     </div>
+
+     @can('IsAdmin')
+           @yield("admin")
+        @else
+        @yield("user")
+           @endcan
+
 </body>
 </html>
